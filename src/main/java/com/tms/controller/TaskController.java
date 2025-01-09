@@ -38,8 +38,14 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
-        return service.updateTask(id, task);
+    public ResponseEntity<Void> updateTask(@PathVariable Long id, @RequestBody Task task) {
+        
+    	if (taskRepository.existsById(id)) {
+            service.updateTask(id, task);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
  // Delete a task by ID

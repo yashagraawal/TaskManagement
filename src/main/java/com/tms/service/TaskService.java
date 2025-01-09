@@ -1,11 +1,9 @@
 package com.tms.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.tms.model.Task;
 import com.tms.model.User;
 import com.tms.repository.TaskRepository;
@@ -19,7 +17,7 @@ public class TaskService {
     
     @Autowired
     private UserRepository userRepository;
-
+    
     public List<Task> getAllTasks(String Username) {
     	User user = userRepository.findByUserName(Username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
@@ -35,7 +33,11 @@ public class TaskService {
 
     public Task updateTask(Long id, Task task) {
     	task.setId(id);
-        return taskRepository.save(task);
+    	
+    	Task updatedTask = taskRepository.findById(id).get();
+    	updatedTask.setCompleted(task.getCompleted());
+    	
+        return taskRepository.save(updatedTask);
     }
 
     public void deleteTask(Long id) {
