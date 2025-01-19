@@ -21,10 +21,6 @@ public class DatabaseSeeder {
             user1.setUserName("admin");
             user1.setPassword("$2a$12$bHLJgsrU6cQlo2O3DstcneYema9m1jmhD6EcAsHqC1pYxQDXUbxnC"); // "admin" in BCrypt Hash
 
-            User user2 = new User();
-            user2.setUserName("user");
-            user2.setPassword("$2a$12$L9l3OXeH5yCbEjJvEyvO9eLcSOvTPPsOHC2iWnNBFOC165KBxJ0sq"); // 1234 in BCrypt Hash
-
             userRepository.save(user1);
             userRepository.save(user2);
 
