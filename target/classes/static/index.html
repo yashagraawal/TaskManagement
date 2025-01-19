@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Management System</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+	<div class="navbar">
+		<div class="title">Task Management System</div>
+		<div class="user-info">
+			<span id="loggedInUser">User Name</span>
+			<form action="/logout" method="post" style="margin: 0;">
+				<button class="logout-button" type="submit">Logout</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="task-form">
+		<h2>Add New Task</h2>
+		<form id="taskForm">
+			<label><b>Title:</b></label><br> <input type="text"
+				id="taskTitle" placeholder="Task Title" required><br> <br>
+			<label><b>Description:</b></label><br> <input type="text"
+				id="taskDescription" placeholder="Task Description" required><br>
+			<br> <label><b>End Date:</b></label><br> <input type="date"
+				id="taskDate" required><br> <br>
+			<button type="submit">Add Task</button>
+		</form>
+	</div>
+
+	<div class="task-list">
+		<h2>Task List</h2>
+		<ul id="taskList"></ul>
+	</div>
+
+	<script src="script.js"> </script>
+
+</body>
+
+</html>

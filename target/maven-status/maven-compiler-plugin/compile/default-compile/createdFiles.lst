@@ -1,0 +1,10 @@
+com\tms\controller\TaskController.class
+com\tms\model\Task.class
+com\tms\component\DatabaseSeeder.class
+com\tms\TaskManagementSystemApplication.class
+com\tms\service\TaskService.class
+com\tms\config\SecurityConfig.class
+com\tms\model\User.class
+com\tms\repository\TaskRepository.class
+com\tms\repository\UserRepository.class
+com\tms\config\JacksonConfig.class

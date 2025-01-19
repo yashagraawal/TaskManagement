@@ -1,0 +1,92 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 20px;
+}
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #007BFF;
+	color: white;
+	padding: 10px 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.navbar .user-info {
+	display: flex;
+	align-items: center;
+}
+
+.navbar .user-info span {
+	margin-right: 10px;
+	font-size: 16px;
+}
+
+.navbar .logout-button {
+	background-color: #0056b3;
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+.navbar .logout-button:hover {
+	background-color: #003f8a;
+}
+
+h1 {
+	color: #333;
+}
+
+.task-form, .task-list {
+	background: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+	background: #007BFF;
+	color: #fff;
+	border: none;
+	padding: 10px 15px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+button:hover {
+	background: #0056b3;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+li {
+	background: #e9ecef;
+	margin: 5px 0;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.completed {
+	background-color: #28a745; /* Green for completed */
+	color: white;
+}
+
+.in-progress {
+	background-color: #ffcc00; /* Light orange for in-progress */
+	color: white;
+}
