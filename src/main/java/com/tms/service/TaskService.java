@@ -35,6 +35,7 @@ public class TaskService {
     	task.setId(id);
     	
     	Task updatedTask = taskRepository.findById(id).get();
+    	
     	updatedTask.setCompleted(task.getCompleted());
     	
         return taskRepository.save(updatedTask);

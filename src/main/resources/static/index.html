@@ -5,101 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Task Management System</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
-	margin: 0;
-	padding: 20px;
-}
+<link rel="stylesheet" href="style.css">
 
-.navbar {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	background-color: #007BFF;
-	color: white;
-	padding: 10px 20px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.navbar .title {
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.navbar .user-info {
-	display: flex;
-	align-items: center;
-}
-
-.navbar .user-info span {
-	margin-right: 10px;
-	font-size: 16px;
-}
-
-.navbar .logout-button {
-	background-color: #0056b3;
-	color: white;
-	border: none;
-	padding: 8px 12px;
-	cursor: pointer;
-	border-radius: 5px;
-	font-size: 14px;
-}
-
-.navbar .logout-button:hover {
-	background-color: #003f8a;
-}
-
-h1 {
-	color: #333;
-}
-
-.task-form, .task-list {
-	background: #fff;
-	padding: 20px;
-	margin-bottom: 20px;
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-button {
-	background: #007BFF;
-	color: #fff;
-	border: none;
-	padding: 10px 15px;
-	cursor: pointer;
-	border-radius: 5px;
-}
-
-button:hover {
-	background: #0056b3;
-}
-
-ul {
-	list-style: none;
-	padding: 0;
-}
-
-li {
-	background: #e9ecef;
-	margin: 5px 0;
-	padding: 10px;
-	border-radius: 5px;
-}
-
-.completed {
-    background-color: #28a745;  /* Green for completed */
-    color: white;
-}
-
-.in-progress {
-    background-color: #ffcc00;  /* Light orange for in-progress */
-    color: white;
-}
-
-</style>
 </head>
 
 <body>
@@ -113,8 +20,6 @@ li {
 			</form>
 		</div>
 	</div>
-
-	<!-- 	<h1>Task Management System</h1> -->
 
 	<div class="task-form">
 		<h2>Add New Task</h2>
@@ -134,91 +39,7 @@ li {
 		<ul id="taskList"></ul>
 	</div>
 
-	<script>
-		const taskForm = document.getElementById('taskForm');
-		const taskList = document.getElementById('taskList');
-
-		const apiBaseUrl = 'http://localhost:8080/tasks'; // Update this with your EC2 instance's public IP
-		
-		// Get the current user name and show on nav bar
-		fetch('/tasks/api/current-user')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('loggedInUser').textContent = (data.username || 'Guest').toUpperCase();
-        })
-        .catch(() => {
-            document.getElementById('loggedInUser').textContent = 'Guest';
-        });
-
-		// Fetch and display tasks
-		async function fetchTasks() {
-    const response = await fetch(apiBaseUrl);
-    const tasks = await response.json();
-    taskList.innerHTML = '';
-    tasks.forEach(task => {
-        const li = document.createElement('li');
-        const toggleButtonClass = task.completed ? 'completed' : 'in-progress';
-        li.innerHTML = `
-            <span><b>Title:</b>${task.title} <br><<b>Description:</b>${task.description} <br><b>Date:</b> ${task.endDate}</span><br>
-            <button class="toggle-button ${toggleButtonClass}" onclick="toggleTaskCompletion(${task.id}, ${task.completed})">
-            	${task.completed ? 'Completed' : 'In Progress'}
-        	</button>
-            <button class="delete" onclick="deleteTask(${task.id})">Delete</button>`;
-        taskList.appendChild(li);
-    });
-}
-
-		// Add a new task
-		taskForm.addEventListener('submit', async (event) => {
-    	event.preventDefault();
-    	const title = document.getElementById('taskTitle').value;
-    	const description = document.getElementById('taskDescription').value;
-    	const endDate = document.getElementById('taskDate').value;
-    	
-    	console.log(endDate);
-
-    	await fetch(apiBaseUrl, {
-        	method: 'POST',
-        	headers: {
-            	'Content-Type': 'application/json',
-        	},
-        	body: JSON.stringify({ title, description, endDate }),
-    	});
-
-    		taskForm.reset();
-    		fetchTasks();
-		});
-		
-		// Initial fetch of tasks
-		fetchTasks();
-
-		async function deleteTask(id) {
-			const response = await fetch(`${apiBaseUrl}/${id}`, {
-				method: 'DELETE'
-			});
-			if (response.ok) {
-				fetchTasks(); // Refresh task list after deletion
-			} else {
-				alert('Failed to delete task.');
-			}
-		}
-		
-		async function toggleTaskCompletion(id, currentStatus) {
-            const updatedStatus = !currentStatus;
-
-            // Update the task completion status in the database
-            await fetch(`${apiBaseUrl}/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ completed: updatedStatus }),
-            });
-
-            fetchTasks(); // Refresh the task list
-        }
-		
-	</script>
+	<script src="script.js"> </script>
 
 </body>
 
